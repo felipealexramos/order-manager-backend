@@ -1,0 +1,38 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: order-manager-api
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:231119@postgres:5432/postgres
+    networks:
+      - order-manager-network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: order-manager-postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=231119
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - order-manager-network
+
+networks:
+  order-manager-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
