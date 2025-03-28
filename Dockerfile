@@ -27,12 +27,12 @@ COPY package*.json ./
 RUN npm ci --only=production
 
 # Copy build artifacts and prisma files
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/node_modules/.prisma /app/node_modules/.prisma
+COPY --from=builder /app/prisma /app/prisma
 
 # Expose the port
 EXPOSE 3000
 
 # Start the application
-CMD ["node", "dist/main"]
+CMD ["node", "dist/src/main"]

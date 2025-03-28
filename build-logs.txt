@@ -1,0 +1,4 @@
+Comando 'docker-compose' não encontrado, mas poder ser instalado com:
+sudo snap install docker          # version 27.5.1, or
+sudo apt  install docker-compose  # version 1.29.2-6
+Veja 'snap info docker' para versões adicionais.
